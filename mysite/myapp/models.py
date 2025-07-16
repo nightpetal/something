@@ -11,6 +11,7 @@ class Product(models.Model):
     product_name = models.CharField(max_length=100)
     product_desc = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,null=True)
+    price = models.FloatField(default=99.99)
     image_url = models.URLField(max_length=300, null=True)
 
     def __str__(self):

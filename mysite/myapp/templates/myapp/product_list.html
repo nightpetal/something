@@ -1,44 +1,40 @@
-
 {% extends "myapp/base.html" %}
-
-
-
 {% block content %}
-    
 
-  <h1>Our Products</h1>
+<h1>Our Products</h1>
 
-  <div class="categories">
-      <strong>Filter by Category:</strong>
-      <button onclick="filterCategory('all')">All</button>
-      {% for category in categories %}
-          <button onclick="filterCategory('{{ category.id }}')">{{ category.name }}</button>
-      {% endfor %}
-  </div>
+<div class="categories">
+    <strong>Filter by Category:</strong>
+    <button onclick="filterCategory('all')">All</button>
+    {% for category in categories %}
+    <button onclick="filterCategory('{{ category.id }}')">{{ category.name }}</button>
+    {% endfor %}
+</div>
 
-  <ul class="products">
-      {% for product in products %}
-          <li data-category="{{ product.category.id }}">
-              <img src="{{ product.image_url }}" alt="{{ product.product_name }}" />
-              <strong>{{ product.product_name }}</strong>
-              <p>{{ product.product_desc }}</p>
-          </li>
-      {% empty %}
-          <li>No products available.</li>
-      {% endfor %}
-  </ul>
+<ul class="products">
+    {% for product in products %}
+    <li data-category="{{ product.category.id }}">
+        <img src="{{ product.image_url }}" alt="{{ product.product_name }}" />
+        <strong>{{ product.product_name }}</strong>
+        <p>{{ product.price }}</p>
+        <p>{{ product.product_desc }}</p>
+    </li>
+    {% empty %}
+    <li>No products available.</li>
+    {% endfor %}
+</ul>
 
-  <script>
-      function filterCategory(catId) {
-          const products = document.querySelectorAll('ul.products li');
-          products.forEach(prod => {
-              if(catId === 'all' || prod.dataset.category === catId) {
-                  prod.style.display = '';
-              } else {
-                  prod.style.display = 'none';
-              }
-          });
-      }
-  </script>
+<script>
+    function filterCategory(catId) {
+        const products = document.querySelectorAll('ul.products li');
+        products.forEach(prod => {
+            if (catId === 'all' || prod.dataset.category === catId) {
+                prod.style.display = '';
+            } else {
+                prod.style.display = 'none';
+            }
+        });
+    }
+</script>
 
 {% endblock %}
